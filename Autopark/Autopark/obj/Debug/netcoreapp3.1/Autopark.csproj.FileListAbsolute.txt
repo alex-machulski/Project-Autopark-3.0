@@ -1,0 +1,13 @@
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\bin\Debug\netcoreapp3.1\Autopark.exe
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\bin\Debug\netcoreapp3.1\Autopark.deps.json
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\bin\Debug\netcoreapp3.1\Autopark.runtimeconfig.json
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\bin\Debug\netcoreapp3.1\Autopark.runtimeconfig.dev.json
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\bin\Debug\netcoreapp3.1\Autopark.dll
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\bin\Debug\netcoreapp3.1\Autopark.pdb
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\obj\Debug\netcoreapp3.1\Autopark.csprojAssemblyReference.cache
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\obj\Debug\netcoreapp3.1\Autopark.AssemblyInfoInputs.cache
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\obj\Debug\netcoreapp3.1\Autopark.AssemblyInfo.cs
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\obj\Debug\netcoreapp3.1\Autopark.csproj.CoreCompileInputs.cache
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\obj\Debug\netcoreapp3.1\Autopark.dll
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\obj\Debug\netcoreapp3.1\Autopark.pdb
+D:\projects\Project-Autopark-3.0\Autopark\Autopark\obj\Debug\netcoreapp3.1\Autopark.genruntimeconfig.cache
