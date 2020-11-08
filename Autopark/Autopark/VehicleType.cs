@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Autopark
 {
@@ -12,11 +10,11 @@ namespace Autopark
         public VehicleType()
         {
         }
-        // test comment
-        public VehicleType(string typeName, double taxCoefficient = 1)
+
+        public VehicleType(string carType, double roadTaxRate = 1)
         {
-            CarType = typeName;
-            RoadTaxRate = taxCoefficient;
+            CarType = carType;
+            RoadTaxRate = roadTaxRate;
         }
 
         public void Display()

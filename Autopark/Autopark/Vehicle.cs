@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Autopark
 {
-    class Vehicle : IComparable
+    class Vehicle : IComparable<Vehicle>
     {
-        public VehicleType Type { get; set; }
-        public string ModelName { get; set; }
-        public string RegistrationNumber { get; set; }
-        public int Weight { get; set; }
-        public int ManufactureYear { get; set; }
-        public int Mileage { get; set; }
-        public Color CarColor { get; set; }
-        public double TankCapacity { get; set; }
+        private VehicleType Type { get; }
+        private string ModelName { get; }
+        private string RegistrationNumber { get; }
+        private int Weight { get; }
+        private int ManufactureYear { get; }
+        internal int Mileage { get; }
+        private Color CarColor { get; }
+        private double TankCapacity { get; }
 
         public Vehicle()
         {
@@ -34,7 +32,17 @@ namespace Autopark
         public double GetCalcTaxPerMonth(int weight, VehicleType type) => (weight * 0.0013) + (type.RoadTaxRate * 30) + 5;
         public override string ToString()
         {
-            return $"{Type.CarType}, {Type.RoadTaxRate}, {ModelName}, {RegistrationNumber}, {Weight} kg, {ManufactureYear}, {Mileage} km, {CarColor}, {TankCapacity}, {GetCalcTaxPerMonth(Weight, Type)}";
+            return $"{Type.CarType}, {Type.RoadTaxRate}, {ModelName}, {RegistrationNumber}, {Weight} kg, {ManufactureYear}, {Mileage} km, {CarColor}, {TankCapacity}, {GetCalcTaxPerMonth(Weight, Type).ToString("0.00")}";
+        }
+
+        public int CompareTo(Vehicle secondVehicle)
+        {
+            if (GetCalcTaxPerMonth(Weight, Type) < secondVehicle.GetCalcTaxPerMonth(secondVehicle.Weight, secondVehicle.Type))
+                return -1;
+            else if (GetCalcTaxPerMonth(Weight, Type) > secondVehicle.GetCalcTaxPerMonth(secondVehicle.Weight, secondVehicle.Type))
+                return 1;
+            else
+                return 0;
         }
     }
 }
