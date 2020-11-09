@@ -4,8 +4,8 @@ namespace Autopark
 {
     class VehicleType
     {
-        public string CarType { get; set; }
-        public double RoadTaxRate { get; set; }
+        internal string CarType { get; set; }
+        internal double RoadTaxRate { get; set; }
 
         public VehicleType()
         {

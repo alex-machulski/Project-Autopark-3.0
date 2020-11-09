@@ -5,21 +5,32 @@ namespace Autopark
     class Vehicle : IComparable<Vehicle>
     {
         private VehicleType Type { get; }
+        private Engine CarEngine { get; }
         private string ModelName { get; }
         private string RegistrationNumber { get; }
         private int Weight { get; }
         private int ManufactureYear { get; }
         internal int Mileage { get; }
         private Color CarColor { get; }
-        private double TankCapacity { get; }
+        internal double TankCapacity { get; }
+        
 
         public Vehicle()
         {
         }
 
-        public Vehicle(VehicleType type, string modelName, string registrationNumber, int weight, int manufactureYear, int mileage, Color carColor, double tankCapacity)
+        public Vehicle(VehicleType type,
+                       Engine carEngine,
+                       string modelName,
+                       string registrationNumber,
+                       int weight,
+                       int manufactureYear,
+                       int mileage,
+                       Color carColor,
+                       double tankCapacity)
         {
             Type = type;
+            CarEngine = carEngine;
             ModelName = modelName;
             RegistrationNumber = registrationNumber;
             Weight = weight;
@@ -29,20 +40,36 @@ namespace Autopark
             TankCapacity = tankCapacity;
         }
 
-        public double GetCalcTaxPerMonth(int weight, VehicleType type) => (weight * 0.0013) + (type.RoadTaxRate * 30) + 5;
+        public double GetCalcTaxPerMonth(int weight, VehicleType type, Engine carEngine)
+        {
+            return (weight * 0.0013) + (type.RoadTaxRate * carEngine.EngineTaxRate * 30) + 5;
+        }
         public override string ToString()
         {
-            return $"{Type.CarType}, {Type.RoadTaxRate}, {ModelName}, {RegistrationNumber}, {Weight} kg, {ManufactureYear}, {Mileage} km, {CarColor}, {TankCapacity}, {GetCalcTaxPerMonth(Weight, Type).ToString("0.00")}";
+            return $"{Type.CarType}, {Type.RoadTaxRate}, {CarEngine}, {ModelName}, {RegistrationNumber}, {Weight} kg, {ManufactureYear}, {Mileage} km, {CarColor}, {TankCapacity}, {GetCalcTaxPerMonth(Weight, Type, CarEngine).ToString("0.00")}";
         }
 
         public int CompareTo(Vehicle secondVehicle)
         {
-            if (GetCalcTaxPerMonth(Weight, Type) < secondVehicle.GetCalcTaxPerMonth(secondVehicle.Weight, secondVehicle.Type))
+            if (GetCalcTaxPerMonth(Weight, Type, CarEngine) < secondVehicle.GetCalcTaxPerMonth(secondVehicle.Weight, secondVehicle.Type, secondVehicle.CarEngine))
                 return -1;
-            else if (GetCalcTaxPerMonth(Weight, Type) > secondVehicle.GetCalcTaxPerMonth(secondVehicle.Weight, secondVehicle.Type))
+            else if (GetCalcTaxPerMonth(Weight, Type, CarEngine) > secondVehicle.GetCalcTaxPerMonth(secondVehicle.Weight, secondVehicle.Type, secondVehicle.CarEngine))
                 return 1;
             else
                 return 0;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj.GetType() != this.GetType())
+                return false;
+
+            Vehicle secondVehicle = (Vehicle)obj;
+
+            if (secondVehicle.Type.CarType == this.Type.CarType && secondVehicle.ModelName == this.ModelName)
+                return true;
+            else
+                return false;
         }
     }
 }
