@@ -1,15 +1,17 @@
 ﻿
 namespace Autopark
 {
-    class Engine
+    abstract class AbstractEngine
     {
         internal string EngineType { get; set; }
         internal double EngineTaxRate { get; set; }
 
-        public Engine(string engineType, double engineTaxRate)
+        public AbstractEngine(string engineType, double engineTaxRate)
         {
             EngineType = engineType;
             EngineTaxRate = engineTaxRate;
         }
+
+        public abstract double GetMaxKilometers(double fuelTank);
     }
 }

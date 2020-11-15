@@ -5,7 +5,7 @@ namespace Autopark
     class Vehicle : IComparable<Vehicle>
     {
         private VehicleType Type { get; }
-        private Engine CarEngine { get; }
+        internal AbstractEngine CarEngine { get; }
         private string ModelName { get; }
         private string RegistrationNumber { get; }
         private int Weight { get; }
@@ -20,7 +20,7 @@ namespace Autopark
         }
 
         public Vehicle(VehicleType type,
-                       Engine carEngine,
+                       AbstractEngine carEngine,
                        string modelName,
                        string registrationNumber,
                        int weight,
@@ -40,7 +40,7 @@ namespace Autopark
             TankCapacity = tankCapacity;
         }
 
-        public double GetCalcTaxPerMonth(int weight, VehicleType type, Engine carEngine)
+        public double GetCalcTaxPerMonth(int weight, VehicleType type, AbstractEngine carEngine)
         {
             return (weight * 0.0013) + (type.RoadTaxRate * carEngine.EngineTaxRate * 30) + 5;
         }

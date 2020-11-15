@@ -46,6 +46,7 @@ namespace Autopark
             };
             AutoparkHelper.PrintCarsArray(cars);
             Array.Sort(cars);
+            Console.WriteLine();
             AutoparkHelper.PrintCarsArray(cars);
             // finding cars with min and max mileage
             int minMileage = cars[0].Mileage, maxMileage = cars[0].Mileage;
@@ -63,8 +64,10 @@ namespace Autopark
                     maxMileageCar = car;
                 }
             }
+            Console.WriteLine();
             Console.WriteLine($"The car with minimum mileage: {minMileageCar}");
             Console.WriteLine($"The car with maximum mileage: {maxMileageCar}");
+            Console.WriteLine();
             // finding the same cars
             int[] tempArrayForSameCars = new int[cars.Length];
             for (int i = 0; i < cars.Length; i++)
@@ -87,7 +90,21 @@ namespace Autopark
                     if (tempArrayForSameCars[i] == 1)
                         Console.WriteLine(cars[i]);
                 }
+                Console.WriteLine();
             }
+            // finding the car with max mileage per full tank/charge
+            Vehicle maxMileagePerTankCar = null;
+            double maxKilometersPerTankCharge = 0.0;
+            foreach (var car in cars)
+            {
+                if (car.CarEngine.GetMaxKilometers(car.TankCapacity) > maxKilometersPerTankCharge) 
+                {
+                    maxKilometersPerTankCharge = car.CarEngine.GetMaxKilometers(car.TankCapacity);
+                    maxMileagePerTankCar = car;
+                }
+            }
+            Console.WriteLine($"The car, that can go the maximum distance ({Math.Round(maxKilometersPerTankCharge)} km) on one tank/charge:");
+            Console.WriteLine(maxMileagePerTankCar);
         }
     }
 }
