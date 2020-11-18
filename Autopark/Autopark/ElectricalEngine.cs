@@ -3,7 +3,7 @@ namespace Autopark
 {
     class ElectricalEngine : AbstractEngine
     {
-        protected double ElectricityConsumption { get; set; }
+        private double ElectricityConsumption { get; set; }
 
         public ElectricalEngine(double electricityConsumption)
             : base("Electrical", 0.1)

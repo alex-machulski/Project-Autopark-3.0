@@ -4,6 +4,7 @@ namespace Autopark
 {
     class VehicleType
     {
+        internal int IdType { get; set; }
         internal string CarType { get; set; }
         internal double RoadTaxRate { get; set; }
 
@@ -11,8 +12,9 @@ namespace Autopark
         {
         }
 
-        public VehicleType(string carType, double roadTaxRate = 1)
+        public VehicleType(int idType, string carType, double roadTaxRate = 1)
         {
+            IdType = idType;
             CarType = carType;
             RoadTaxRate = roadTaxRate;
         }

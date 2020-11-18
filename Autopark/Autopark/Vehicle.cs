@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Autopark
 {
     class Vehicle : IComparable<Vehicle>
     {
-        private VehicleType Type { get; }
+        internal int Id { get; set; }
+        internal List<Rent> RentList { get; set; } = new List<Rent>();
+        internal VehicleType Type { get; }
         internal AbstractEngine CarEngine { get; }
-        private string ModelName { get; }
-        private string RegistrationNumber { get; }
-        private int Weight { get; }
-        private int ManufactureYear { get; }
+        internal string ModelName { get; }
+        internal string RegistrationNumber { get; }
+        internal int Weight { get; }
+        internal int ManufactureYear { get; }
         internal int Mileage { get; }
-        private Color CarColor { get; }
+        internal Color CarColor { get; }
         internal double TankCapacity { get; }
         
 
@@ -19,7 +22,8 @@ namespace Autopark
         {
         }
 
-        public Vehicle(VehicleType type,
+        public Vehicle(int id,
+                       VehicleType type,
                        AbstractEngine carEngine,
                        string modelName,
                        string registrationNumber,
@@ -29,6 +33,7 @@ namespace Autopark
                        Color carColor,
                        double tankCapacity)
         {
+            Id = id;
             Type = type;
             CarEngine = carEngine;
             ModelName = modelName;
@@ -44,9 +49,23 @@ namespace Autopark
         {
             return (weight * 0.0013) + (type.RoadTaxRate * carEngine.EngineTaxRate * 30) + 5;
         }
+
+        public double GetTotalIncome()
+        {
+            double totalIncome = 0.0;
+            foreach (var position in RentList)
+            {
+                totalIncome += position.RentPrice;
+            }
+            return totalIncome;
+        }
+        public double GetTotalProfit()
+        {
+            return GetTotalIncome() - GetCalcTaxPerMonth(Weight, Type, CarEngine);
+        }
         public override string ToString()
         {
-            return $"{Type.CarType}, {Type.RoadTaxRate}, {CarEngine}, {ModelName}, {RegistrationNumber}, {Weight} kg, {ManufactureYear}, {Mileage} km, {CarColor}, {TankCapacity}, {GetCalcTaxPerMonth(Weight, Type, CarEngine).ToString("0.00")}";
+            return $"{Id}, {Type.CarType}, {Type.RoadTaxRate}, {CarEngine}, {ModelName}, {RegistrationNumber}, {Weight} kg, {ManufactureYear}, {Mileage} km, {CarColor}, {TankCapacity}, {GetCalcTaxPerMonth(Weight, Type, CarEngine).ToString("0.00")}";
         }
 
         public int CompareTo(Vehicle secondVehicle)

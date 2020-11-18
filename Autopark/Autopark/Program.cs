@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Autopark
 {
@@ -9,10 +11,10 @@ namespace Autopark
         {
             var carTypes = new [] 
             { 
-                new VehicleType("Bus", 1.2), 
-                new VehicleType("Car"), 
-                new VehicleType("Rink", 1.5), 
-                new VehicleType("Tractor", 1.2) 
+                new VehicleType(1, "Bus", 1.2), 
+                new VehicleType(2, "Car"), 
+                new VehicleType(3, "Rink", 1.5), 
+                new VehicleType(4, "Tractor", 1.2) 
             };
             double maxTaxRate = 0.0, sumTaxRate = 0.0;
 
@@ -36,13 +38,13 @@ namespace Autopark
             }
             var cars = new[]
             {
-                new Vehicle(carTypes[0], new GasolineEngine(2, 8.1), "Volkswagen Crafter", "5427 AX-7", 2022, 2015, 376000, Color.Blue, 75),
-                new Vehicle(carTypes[0], new GasolineEngine(2.18, 8.5), "Volkswagen Crafter", "6427 AA-7", 2500, 2014, 227010, Color.White, 75),
-                new Vehicle(carTypes[0], new ElectricalEngine(50), "Electric Bus E321", "6785 BA-7", 12080, 2019, 20451, Color.Green, 150),
-                new Vehicle(carTypes[1], new DieselEngine(1.6, 7.2), "Volkswagen Golf 5", "8682 AX-7", 1200, 2006, 230451, Color.Gray, 55),
-                new Vehicle(carTypes[1], new ElectricalEngine(25), "Tesla Model S 70D", "E001 AA-7", 2200, 2019, 10454, Color.White, 70),
-                new Vehicle(carTypes[2], new DieselEngine(3.2, 25), "Hamm HD 12 VV", null, 3000, 2016, 122, Color.Yellow, 20),
-                new Vehicle(carTypes[3], new DieselEngine(4.75, 20.1), "МТЗ Беларус-1025.4", "1145 AB-7", 1200, 2020, 109, Color.Red, 135)
+                new Vehicle(1, carTypes[0], new GasolineEngine(2, 8.1), "Volkswagen Crafter", "5427 AX-7", 2022, 2015, 376000, Color.Blue, 75),
+                new Vehicle(2, carTypes[0], new GasolineEngine(2.18, 8.5), "Volkswagen Crafter", "6427 AA-7", 2500, 2014, 227010, Color.White, 75),
+                new Vehicle(3, carTypes[0], new ElectricalEngine(50), "Electric Bus E321", "6785 BA-7", 12080, 2019, 20451, Color.Green, 150),
+                new Vehicle(4, carTypes[1], new DieselEngine(1.6, 7.2), "Volkswagen Golf 5", "8682 AX-7", 1200, 2006, 230451, Color.Gray, 55),
+                new Vehicle(5, carTypes[1], new ElectricalEngine(25), "Tesla Model S 70D", "E001 AA-7", 2200, 2019, 10454, Color.White, 70),
+                new Vehicle(6, carTypes[2], new DieselEngine(3.2, 25), "Hamm HD 12 VV", null, 3000, 2016, 122, Color.Yellow, 20),
+                new Vehicle(7, carTypes[3], new DieselEngine(4.75, 20.1), "МТЗ Беларус-1025.4", "1145 AB-7", 1200, 2020, 109, Color.Red, 135)
             };
             AutoparkHelper.PrintCarsArray(cars);
             Array.Sort(cars);
@@ -105,6 +107,25 @@ namespace Autopark
             }
             Console.WriteLine($"The car, that can go the maximum distance ({Math.Round(maxKilometersPerTankCharge)} km) on one tank/charge:");
             Console.WriteLine(maxMileagePerTankCar);
+            Console.WriteLine();
+            // collections
+            var collection = new Collections("types.csv", "vehicles.csv", "rents.csv");
+            collection.Print();
+            collection.Vehicles.Add(new Vehicle(8,
+                                                collection.Types[1],
+                                                new GasolineEngine(6.0, 16.8),
+                                                "Mercedes-Benz S600",
+                                                "7878 AA-7",
+                                                2310,
+                                                2017,
+                                                75000,
+                                                Color.Gray,
+                                                80));
+            collection.Delete(1);
+            collection.Delete(4);
+            collection.Print();
+            collection.Sort(new VehiclesComparer());
+            collection.Print();
         }
     }
 }
