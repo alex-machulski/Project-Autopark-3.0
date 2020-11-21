@@ -10,7 +10,7 @@ namespace Autopark
         
         public CarWash(string vehicles)
         {
-            VehiclesQueue = new Vehicle[SizeQueue(vehicles) + 5];
+            VehiclesQueue = new Vehicle[SizeQueue(vehicles)];
         }
 
         public int SizeQueue(string inFile)

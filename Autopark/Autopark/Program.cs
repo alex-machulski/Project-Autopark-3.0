@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Text;
+using System.Collections.Generic;
 
 namespace Autopark
 {
@@ -145,6 +144,22 @@ namespace Autopark
             Console.WriteLine("The garage is full");
             while (carGarage.Count() > 0)
                 carGarage.Pop();
+            Console.WriteLine();
+            // dictionary (level 8)
+            CarParts carParts = new CarParts("autoparts.csv");
+            Dictionary<string, int> allParts = new Dictionary<string, int>();            
+            foreach (var part in carParts.AutoParts)
+            {
+                if (allParts.ContainsKey(part))
+                    allParts[part]++;
+                else
+                    allParts.Add(part, 1);
+            }
+            Console.WriteLine("Need to order:");
+            foreach (KeyValuePair<string, int> keyValue in allParts)
+            {
+                Console.WriteLine($"{keyValue.Key} - {keyValue.Value} шт.");
+            }
         }
     }
 }
