@@ -108,7 +108,7 @@ namespace Autopark
             Console.WriteLine($"The car, that can go the maximum distance ({Math.Round(maxKilometersPerTankCharge)} km) on one tank/charge:");
             Console.WriteLine(maxMileagePerTankCar);
             Console.WriteLine();
-            // collections
+            // collections (level 5)
             var collection = new Collections("types.csv", "vehicles.csv", "rents.csv");
             collection.Print();
             collection.Vehicles.Add(new Vehicle(8,
@@ -126,6 +126,15 @@ namespace Autopark
             collection.Print();
             collection.Sort(new VehiclesComparer());
             collection.Print();
+            Console.WriteLine();
+            // queue (level 6)
+            CarWash carWash = new CarWash("vehicles.csv");
+            for (int i = 0; i < collection.Vehicles.Count; i++)
+            {
+                carWash.Enqueue(collection.Vehicles[i]);
+            }
+            while (carWash.Count() > 0)
+                carWash.Dequeue();
         }
     }
 }

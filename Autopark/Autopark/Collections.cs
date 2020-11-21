@@ -7,8 +7,8 @@ namespace Autopark
 {
     class Collections
     {
-        public List<VehicleType> Types { get; set; }
-        public List<Vehicle> Vehicles { get; set; }
+        internal List<VehicleType> Types { get; set; }
+        internal List<Vehicle> Vehicles { get; set; }
 
         public Collections(string types, string vehicles, string rents)
         {
@@ -38,7 +38,7 @@ namespace Autopark
             return tempVehicleTypes;
         }
 
-        private List<Vehicle> LoadVehicles(string inFile)
+        internal List<Vehicle> LoadVehicles(string inFile)
         {
             var tempVehicles = new List<Vehicle>();
             var vehTypes = LoadTypes("types.csv");
@@ -90,7 +90,7 @@ namespace Autopark
             return new VehicleType(int.Parse(fields[0]), fields[1], double.Parse(fields[2]));
         }
 
-        private Vehicle CreateVehicle(string csvString)
+        internal Vehicle CreateVehicle(string csvString)
         {
             var vehTypes = LoadTypes("types.csv");
             string[] fields = csvString.Split(';');
