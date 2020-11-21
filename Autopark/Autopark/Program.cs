@@ -135,6 +135,16 @@ namespace Autopark
             }
             while (carWash.Count() > 0)
                 carWash.Dequeue();
+            Console.WriteLine();
+            // stack (level 7)
+            CarGarage carGarage = new CarGarage("vehicles.csv");
+            for (int i = 0; i < collection.Vehicles.Count; i++)
+            {
+                carGarage.Push(collection.Vehicles[i]);
+            }
+            Console.WriteLine("The garage is full");
+            while (carGarage.Count() > 0)
+                carGarage.Pop();
         }
     }
 }
